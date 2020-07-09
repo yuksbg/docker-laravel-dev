@@ -23,4 +23,6 @@ docker run -it -v $(pwd):/var/www -p 80:80 -p 1022:22 laravel-dev
 ```
 
 ### Note
-Change line 54 for your public key
+```bash
+docker pull yuksbg/laravel-php7-development
+```
