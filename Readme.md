@@ -7,6 +7,7 @@ Simple docker image which is usefull for laravel development, included component
   - SSH server
   - Nginx
   - Alpine as base image
+  - Composer
 
 ### Building
 
