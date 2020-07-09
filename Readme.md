@@ -1,9 +1,12 @@
 ## Simple docker image for laravel development
 
 Simple docker image which is usefull for laravel development, included components:
-    - php 7.4
-    - Redis
-    - SSH server
+
+  - PHP 7.4
+  - Redis
+  - SSH server
+  - Nginx
+  - Alpine as base image
 
 ### Building
 
