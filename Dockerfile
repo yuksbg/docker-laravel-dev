@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 
 ENV SUPERVISOR_CONF_DIR=/etc/supervisor.d
 ENV SUPERVISOR_CONF_FILE=/etc/supervisord.conf
