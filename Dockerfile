@@ -3,6 +3,8 @@ FROM php:8.0-apache
 ENV SUPERVISOR_CONF_DIR=/etc/supervisor.d
 ENV SUPERVISOR_CONF_FILE=/etc/supervisord.conf
 
+USER root
+
 RUN apt-get update && apt-get install -y \
       libicu-dev \
       libpq-dev \
@@ -19,6 +21,7 @@ RUN apt-get update && apt-get install -y \
       sqlite3 libsqlite3-dev \
       libxml2-dev \
     && pecl install mcrypt \
+    && pecl install redis \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-install \
@@ -30,12 +33,14 @@ RUN apt-get update && apt-get install -y \
       zip \
       opcache \
       bcmath \
-      curl \
       iconv \
+      curl \
       pdo \
       pdo_sqlite \
       tokenizer \
       xml \
+    && docker-php-ext-enable redis \
+    && docker-php-ext-enable redis.so \
     && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer 
 
 COPY vhost.conf /etc/apache2/sites-available/laravel.conf
@@ -57,4 +62,5 @@ RUN echo "root:root" | chpasswd && chmod 600 /root/.ssh/authorized_keys
 
 WORKDIR /var/www/html
 EXPOSE 80
+EXPOSE 22
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
